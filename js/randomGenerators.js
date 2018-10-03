@@ -2,30 +2,59 @@
 // TODO: Use constructor notation to create an object
 // with properties and methods that can be shared by both
 // diceRollGenerator and eightBallGenerator.
-function Generator() {
-  // YOUR CODE HERE
+
+
+function Generator(array) {
+  this.array = array || [];
+  this.generate = function(){
+    var randomNumber = Math.random();
+    var randomAnswer = Math.floor(randomNumber * this.array.length);
+    var answer = this.array[randomAnswer];
+    return answer;
+  };
+
+  this.addResult = function(value) {
+    this.array.push(value);
+  };
+
+  this.removeResult = function(value) {
+    for( var i = 0; i < this.array.length-1; i++){
+     if ( array[i] === value) {
+       this.array.splice(i, 1);
+     }
+    }
+  }
 }
 
-// TODO: Initialise diceRollGenerator and eightBallGenerator
-// using the constructor notation and the Generator object
-// you just created
-const diceRollGenerator = null;
-const eightBallGenerator = null;
+var diceRollGenerator = new Generator([1, 2, 3, 4, 5, 6]);
+
+var eightBallGenerator = new Generator([
+  "It is certain.",
+  "It is decidedly so.",
+  "Without a doubt.",
+  "Yes - definitely.",
+  "You may rely on it.",
+  "Reply hazy, try again.",
+  "Ask again later.",
+  "Better not tell you now.",
+  "Cannot predict now.",
+  "Concentrate and ask again.",
+  "Don't count on it.",
+  "My reply is no.",
+  "My sources say no.",
+  "Outlook not so good.",
+  "Very doubtful."]);
 
 function handleDiceRoll() {
+  const diceResult = diceRollGenerator.generate();
   const resultElement = document.getElementById('diceResult');
-
-  // TODO: call a method on diceRollGenerator to populate result with a random value
-  const result = "result";
-  resultElement.innerHTML = result;
+  resultElement.innerHTML = diceResult;
 }
 
 function handleEightBallShake() {
+  const ballResult = eightBallGenerator.generate();
   const resultElement = document.getElementById('eightBallResult');
-
-  // TODO: call a method on eightBallGenerator to populate result with a random value
-  const result = "result";
-  resultElement.innerHTML = result;
+  resultElement.innerHTML = ballResult;
 }
 
 document.addEventListener("DOMContentLoaded", function() {

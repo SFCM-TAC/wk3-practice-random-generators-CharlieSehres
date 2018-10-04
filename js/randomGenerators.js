@@ -13,12 +13,19 @@ function Generator(array) {
     return answer;
   };
 
+  // this.addResult = function(value) {
+  //     this.array.push(value);
+  // }
+
   this.addResult = function(value) {
-    this.array.push(value);
+    if (this.array.indexOf(value) === -1) {
+      this.array.push(value);
+    }
   };
 
+
   this.removeResult = function(value) {
-    for( var i = 0; i < this.array.length-1; i++){
+    for( var i = 0; i < this.array.length; i++){
      if ( array[i] === value) {
        this.array.splice(i, 1);
      }
